@@ -1,0 +1,7 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Time-Timestamp.t
+lib/Time/Timestamp.pm
+META.yml                                 Module meta-data (added by MakeMaker)

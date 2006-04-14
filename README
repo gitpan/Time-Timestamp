@@ -1,0 +1,44 @@
+NAME
+    Time::Timestamp - Perl extension the easy manipulation of timestamps
+    (subclass of datetime)
+
+SYNOPSIS
+      use Time::Timestamp;
+      my $t = Time::Timestamp->new(ts => time) or Time::Timestamp->new(ts => $strTime); (see HTTP::Date::str2time for list of stringtypes)
+      print $t->tsIso()."\n";
+      print $->eepoch()."\n";
+      $t->set_time_zone('est');
+
+DESCRIPTION
+    This takes the best of DateTime / HTTP::Date and mixes them together.
+    HTTP::Date has some great date parsing capability, so we use that to
+    translate most any time format and store it as a DateTime obj.
+    Everything is calculated and stored as eepoch, so local timezone won't
+    be an issue util you need to translate.
+
+OBJECT ORIENTED METHODS
+  set_time_zone
+      This cleans up the DateTime::set_time_zone. It gets fussy if you don't send it in uppercase.
+
+  tsIso
+      This returns the ts in ISO format 'yyyy-dd-mm 00:00:00'
+
+PROCEDURAL METHODS
+  normalize
+      returns the eepoch version of your string (interface to HTTP::Date::str2time)
+      my $t = Time::Timetamp::normalize($strTime,$TZ);
+
+SEE ALSO
+      DateTime
+      HTTP::Date
+
+AUTHOR
+    Wes Young, <saxguard9-cpan@yahoo.com>
+
+COPYRIGHT AND LICENSE
+    Copyright (C) 2006 by Wes Young
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself, either Perl version 5.8.6 or, at
+    your option, any later version of Perl 5 you may have available.
+
