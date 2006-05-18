@@ -4,10 +4,13 @@ NAME
 
 SYNOPSIS
       use Time::Timestamp;
-      my $t = Time::Timestamp->new(ts => time) or Time::Timestamp->new(ts => $strTime); (see HTTP::Date::str2time for list of stringtypes)
+      my $t = Time::Timestamp->new(ts => time) or Time::Timestamp->new(ts => $strTime,time_zone => 'local');
       print $t->tsIso()."\n";
       print $->eepoch()."\n";
-      $t->set_time_zone('est');
+
+      $t->set_time_zone('local');
+      $t->set_time_zone('America/New_York');
+      $t->set_time_zone('UTC');
 
 DESCRIPTION
     This takes the best of DateTime / HTTP::Date and mixes them together.
@@ -17,20 +20,48 @@ DESCRIPTION
     be an issue util you need to translate.
 
 OBJECT ORIENTED METHODS
-  set_time_zone
-      This cleans up the DateTime::set_time_zone. It gets fussy if you don't send it in uppercase.
+  new()
+    Object Constructor. Uses HTTP::Date to parse date strings.
 
-  tsIso
-      This returns the ts in ISO format 'yyyy-dd-mm 00:00:00'
+    Accepts:
+
+      ts => [int|string], defaults to time()
+      time_zone => [int|string], defaults to 'UTC' (hint, using time_zone => 'local' is a good thing, then use the epoch() for saving ;-))
+
+  tsIso()
+    This returns the ts in ISO format 'yyyy-dd-mm hh:mm:ss'. When passed a
+    timezone string, it will return the translated time for that zone.
+
+      $t->tsIso('UTC'); returns tsIso() for UTC.
+      $t->tsIso('America/New_York'); returns tsIso for that timezone (same with 'local');
+      $t->tsIso() will return a value for the stored timezone
+
+    The timezone of the Time::Timestamp object is changed for a moment to
+    accomplish the translation, but is returned before the value is
+    returned.
+
+  tsIsoShort()
+    Returns the ts in ISO shorthand format 'yyyyddmmhhmmss'. Good for serial
+    revisioning. When passed a timezone string, it will return the
+    translated time for that zone.
+
+      $t->tsIsoShort('UTC'); returns tsIso() for UTC.
+      $t->tsIsoShort('America/New_York'); returns tsIso for that timezone (same with 'local');
+      $t->tsIsoShort() will return a value for the stored timezone
+
+    The timezone of the Time::Timestamp object is changed for a moment to
+    accomplish the translation, but is returned before the value is
+    returned.
 
 PROCEDURAL METHODS
-  normalize
-      returns the eepoch version of your string (interface to HTTP::Date::str2time)
+  normalize()
+    Returns the eepoch version of your string (interface to
+    HTTP::Date::str2time)
+
       my $t = Time::Timetamp::normalize($strTime,$TZ);
 
 SEE ALSO
-      DateTime
-      HTTP::Date
+    DateTime,DateTime::Timezone,HTTP::Date
 
 AUTHOR
     Wes Young, <saxguard9-cpan@yahoo.com>

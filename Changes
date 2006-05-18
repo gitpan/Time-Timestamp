@@ -1,5 +1,9 @@
 Revision history for Perl extension Time::Timestamp.
 
+1.01  Wed May 17 18:00:00 2006
+	- Cleaned up some time zone issues, cause um... damn.
+	- Cleaned up docs
+
 1.00  Fri Apr 14 15:20:00 2006
 	- perldoc cleaned up for release
 

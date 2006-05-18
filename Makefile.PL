@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Time::Timestamp',
     VERSION_FROM      => 'lib/Time/Timestamp.pm', # finds $VERSION
-    PREREQ_PM         => {HTTP::Date => undef, DateTime => undef}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => {HTTP::Date => 1.47, DateTime => 0.30}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Time/Timestamp.pm', # retrieve abstract from module
        AUTHOR         => 'Wes Young saxguard9-cpan@yahoo.com>') : ()),
